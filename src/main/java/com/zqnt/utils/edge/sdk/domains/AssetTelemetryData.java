@@ -44,6 +44,7 @@ public class AssetTelemetryData {
 	private Float windSpeed;
 	private Boolean positionValid;
 	private NetworkInformation networkInformation;
+	private WirelessLinkInformation wirelessLink;
 	private AirConditioner airConditioner;
 	private ManualControlStateEnum manualControlState;
 	private PositionState positionState;
@@ -66,6 +67,23 @@ public class AssetTelemetryData {
 		private NetworkTypeEnum type;
 		private Float rate;
 		private NetworkStateQualityEnum quality;
+	}
+
+	@Data
+	@Builder
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class WirelessLinkInformation {
+		private Float fourthGenerationFreqBand;
+		private Integer fourthGenerationGndQuality;
+		private Boolean fourthGenerationLinkState;
+		private Integer fourthGenerationQuality;
+		private Integer fourthGenerationUavQuality;
+		private Integer dongleNumber;
+		private String linkWorkmode;
+		private Float sdrFreqBand;
+		private Boolean sdrLinkState;
+		private Integer sdrQuality;
 	}
 
 	@Data
