@@ -45,6 +45,7 @@ public class AssetTelemetryData {
 	private Boolean positionValid;
 	private NetworkInformation networkInformation;
 	private WirelessLinkInformation wirelessLink;
+	private SdrState sdrState;
 	private AirConditioner airConditioner;
 	private ManualControlStateEnum manualControlState;
 	private PositionState positionState;
@@ -108,5 +109,15 @@ public class AssetTelemetryData {
 		private Integer quality;
 	}
 
+
+	@Data
+	@Builder
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class SdrState {
+		private Integer downQuality;
+		private Double frequencyBand;
+		private Integer upQuality;
+	}
 
 }
