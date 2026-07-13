@@ -30,10 +30,10 @@ public class SubAssetDTO implements Serializable {
 	private AssetTypeEnum type;
 	private AssetVendor vendor;
 	private AssetConnection connection;
-	private String connectionString;
+	private String systemConnectionString;
 	private String model;
-	private Integer port;
-	private String liveStreamServer;
+	private String liveStreamPushUrl;
+	private String liveStreamPullUrl;
 	private Boolean streamUrlPredefined;
 	private String externalDeviceType;
 	private String externalDeviceSubType;

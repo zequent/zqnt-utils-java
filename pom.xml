@@ -60,6 +60,7 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <grpc.version>1.62.2</grpc.version>
         <protobuf.version>3.25.1</protobuf.version>
+        <mutiny.version>2.6.0</mutiny.version>
     </properties>
 
     <distributionManagement>
@@ -140,6 +141,11 @@
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>2.2.20</version>
+        </dependency>
+        <dependency>
+            <groupId>io.smallrye.reactive</groupId>
+            <artifactId>mutiny</artifactId>
+            <version>${mutiny.version}</version>
         </dependency>
 
     </dependencies>

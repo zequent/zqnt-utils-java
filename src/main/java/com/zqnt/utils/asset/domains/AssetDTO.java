@@ -31,8 +31,9 @@ public class AssetDTO implements Serializable {
 	private AssetVendor vendor;
 	private AssetConnection connection;
 	private String model;
-	private String connectionString;
-	private String liveStreamServer;
+	private String systemConnectionString;
+	private String liveStreamPushUrl;
+	private String liveStreamPullUrl;
 	private String externalId;
 	private String externalDeviceType;
 	private String externalDeviceSubType;

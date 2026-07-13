@@ -3,7 +3,6 @@ package com.zqnt.utils.missionautonomy.domains.config;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.zqnt.utils.common.proto.*;
-import com.zqnt.utils.missionautonomy.domains.TaskType;
 import com.zqnt.utils.missionautonomy.domains.WaypointDTO;
 import lombok.*;
 
@@ -200,12 +199,12 @@ public class WaypointTaskConfig implements TaskConfigTemplate {
 
     @Override
     public String getConfigType() {
-        return TaskType.TASK_TYPE_WAYPOINT.name();
+        return TaskTypeProto.TASK_TYPE_WAYPOINT.name();
     }
 
     @Override
-    public TaskType getTaskType() {
-        return TaskType.TASK_TYPE_WAYPOINT;
+    public TaskTypeProto getTaskType() {
+        return TaskTypeProto.TASK_TYPE_WAYPOINT;
     }
 
     @Override
