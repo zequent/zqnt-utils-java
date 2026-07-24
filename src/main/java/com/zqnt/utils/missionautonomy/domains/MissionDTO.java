@@ -24,7 +24,6 @@ import java.util.UUID;
 @Builder
 public class MissionDTO implements Serializable {
     private UUID id;
-    private UUID operationId;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private String modifiedFrom;
@@ -45,7 +44,7 @@ public class MissionDTO implements Serializable {
     @Builder.Default
     private List<TaskDTO> tasks = new ArrayList<>();
     @Builder.Default
-    private List<OperationZoneDTO> noFlyZones = new ArrayList<>();
+    private List<MissionZoneDTO> zones = new ArrayList<>();
 
     /**
      * Validates this mission DTO.
@@ -65,8 +64,8 @@ public class MissionDTO implements Serializable {
             tasks.forEach(TaskDTO::validate);
         }
 
-        if (noFlyZones != null) {
-            noFlyZones.forEach(OperationZoneDTO::validate);
+        if (zones != null) {
+            zones.forEach(MissionZoneDTO::validate);
         }
     }
 }

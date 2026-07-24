@@ -23,7 +23,6 @@ public class SchedulerDTO implements Serializable {
     private LocalDateTime modifiedAt;
     private String modifiedFrom;
     private String name;
-    private UUID operationId;
     private UUID missionId;
     private UUID taskId;
     private String cronExpression;
@@ -44,8 +43,8 @@ public class SchedulerDTO implements Serializable {
             throw new IllegalArgumentException("Scheduler name must be provided");
         }
 
-        if (operationId == null && missionId == null && taskId == null) {
-            throw new IllegalArgumentException("Operation, mission or task ID must be specified");
+        if (missionId == null && taskId == null) {
+            throw new IllegalArgumentException("Mission or task ID must be specified");
         }
 
         if (cronExpression == null || cronExpression.trim().isEmpty()) {

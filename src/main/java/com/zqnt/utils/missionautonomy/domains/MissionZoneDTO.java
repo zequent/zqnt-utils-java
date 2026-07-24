@@ -1,23 +1,22 @@
 package com.zqnt.utils.missionautonomy.domains;
 
-import java.util.UUID;
-
-import com.zqnt.utils.common.proto.OperationZoneType;
+import com.zqnt.utils.common.proto.MissionZoneType;
 import com.zqnt.utils.common.proto.ZoneEnforcementType;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class OperationZoneDTO {
+public class MissionZoneDTO {
     private UUID id;
     private String name;
-    private OperationZoneType type;
+    private MissionZoneType type;
     private ZoneEnforcementType enforcementType;
     private Boolean active;
     private Integer priority;

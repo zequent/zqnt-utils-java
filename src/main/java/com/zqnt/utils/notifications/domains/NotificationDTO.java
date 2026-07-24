@@ -28,5 +28,5 @@ public class NotificationDTO implements Serializable {
     private String message;
     private Boolean read;
     private String taskId;
-    private String operationId;
+    private String missionId;
 }
