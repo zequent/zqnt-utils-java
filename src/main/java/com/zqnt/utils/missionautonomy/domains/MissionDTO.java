@@ -10,8 +10,6 @@ import lombok.NoArgsConstructor;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -34,11 +32,8 @@ public class MissionDTO implements Serializable {
     private String geoJson;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    @Builder.Default
     private Set<String> assignedAssets = new HashSet<>();
     private String updatedUser;
-    @Builder.Default
-    private List<NoFlyZoneDTO> noFlyZones = new ArrayList<>();
 
     /**
      * Validates this mission DTO.
@@ -48,6 +43,5 @@ public class MissionDTO implements Serializable {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Mission name must be specified");
         }
-        noFlyZones.forEach(NoFlyZoneDTO::validate);
     }
 }

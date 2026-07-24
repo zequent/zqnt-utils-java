@@ -4,7 +4,6 @@ package com.zqnt.utils.asset.domains;
 import com.zqnt.utils.common.proto.AssetConnection;
 import com.zqnt.utils.common.proto.AssetTypeEnum;
 import com.zqnt.utils.common.proto.AssetVendor;
-import com.zqnt.utils.common.proto.LiveStreamTypeEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,8 +11,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -41,9 +38,4 @@ public class SubAssetDTO implements Serializable {
 	private String externalDeviceType;
 	private String externalDeviceSubType;
 	private String externalId;
-	private Boolean online;
-	private LiveStreamTypeEnum streamType;
-	private UUID organization;
-	@Builder.Default
-	private List<AssetPayloadDTO> payloads = new ArrayList<>();
 }
