@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -38,4 +40,6 @@ public class SubAssetDTO implements Serializable {
 	private String externalDeviceType;
 	private String externalDeviceSubType;
 	private String externalId;
+	@Builder.Default
+	private List<AssetPayloadDTO> payloads = new ArrayList<>();
 }

@@ -44,6 +44,8 @@ public class MissionDTO implements Serializable {
     private Set<String> assignedAssets = new HashSet<>();
     @Builder.Default
     private List<TaskDTO> tasks = new ArrayList<>();
+    @Builder.Default
+    private List<OperationZoneDTO> noFlyZones = new ArrayList<>();
 
     /**
      * Validates this mission DTO.
@@ -61,6 +63,10 @@ public class MissionDTO implements Serializable {
 
         if (tasks != null) {
             tasks.forEach(TaskDTO::validate);
+        }
+
+        if (noFlyZones != null) {
+            noFlyZones.forEach(OperationZoneDTO::validate);
         }
     }
 }

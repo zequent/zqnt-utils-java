@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 /**
  * POJO representation of SubAsset (Drone) Telemetry data.
@@ -38,6 +40,22 @@ public class SubAssetTelemetryData {
 	private Double totalMovementTime;
 	private SubAssetMode mode;
 	private String country;
+	private List<ComponentTelemetryData> componentTelemetry;
+
+	@Data
+	@Builder
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class ComponentTelemetryData {
+		private String componentId;
+		private String externalId;
+		private String kind;
+		private LocalDateTime timestamp;
+		private CameraData cameraData;
+		private RangeFinderData rangeFinderData;
+		private SensorData sensorData;
+		private Map<String, Object> attributes;
+	}
 
 	@Data
 	@Builder

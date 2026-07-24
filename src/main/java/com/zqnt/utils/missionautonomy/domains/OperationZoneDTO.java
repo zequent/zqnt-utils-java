@@ -22,4 +22,16 @@ public class OperationZoneDTO {
     private Boolean active;
     private Integer priority;
     private DynamicConfigDTO config;
+
+    public void validate() {
+        if (name == null || name.isBlank()) {
+            throw new IllegalArgumentException("Zone name must be specified");
+        }
+        if (type == null) {
+            throw new IllegalArgumentException("Zone type must be specified");
+        }
+        if (enforcementType == null) {
+            throw new IllegalArgumentException("Zone enforcement type must be specified");
+        }
+    }
 }
