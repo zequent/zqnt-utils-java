@@ -96,7 +96,7 @@ jobs:
             \`\`\`xml
             <dependency>
                 <groupId>com.zqnt</groupId>
-                <artifactId>zqnt-utils</artifactId>
+                <artifactId>zqnt-utils-java</artifactId>
                 <version>${version}</version>
             </dependency>
             \`\`\`

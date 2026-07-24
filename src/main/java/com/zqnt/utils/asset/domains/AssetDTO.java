@@ -39,8 +39,6 @@ public class AssetDTO implements Serializable {
 	private String externalId;
 	private String externalDeviceType;
 	private String externalDeviceSubType;
-	@Deprecated
-	private SubAssetDTO subAsset;
 	@Builder.Default
 	private List<SubAssetDTO> subAssets = new ArrayList<>();
 	@Builder.Default

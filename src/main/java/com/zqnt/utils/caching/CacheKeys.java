@@ -15,10 +15,9 @@ public enum CacheKeys {
 
 	ASSET_ONLINE("asset-online:"),
 	ASSET_MODE("asset-mode:"),
-	ASSET_TELEMETRY("asset-telemetry:"),
+	TELEMETRY("telemetry:{sn}"),
 	ASSET_LINK_TELEMETRY("asset-link-telemetry:"),
 	ASSET_EXTENDED_TELEMTRY("asset-extended-telemetry:"),
-	SUBASSET_TELEMETRY("subasset-telemetry:"),
 	ASSET_MANUAL_CONTROL_STATE("drc-state:"),
 	ASSET_LIVE_STREAM_STATE("live-stream-state:"),
 	ASSET_SERVICES_REPLY_WAIT("asset-task-reply-wait:{tid}:{method}"),

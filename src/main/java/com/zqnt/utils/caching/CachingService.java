@@ -9,8 +9,7 @@ import com.zqnt.utils.common.proto.ManualControlState;
 import com.zqnt.utils.common.proto.SubAssetProtoDTO;
 import com.zqnt.utils.common.proto.TaskProtoDTO;
 import com.zqnt.utils.core.EdgeEndpointDTO;
-import com.zqnt.utils.livedata.proto.AssetTelemetry;
-import com.zqnt.utils.livedata.proto.SubAssetTelemetry;
+import com.zqnt.utils.livedata.proto.Telemetry;
 import io.smallrye.mutiny.Uni;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -117,17 +116,13 @@ public interface CachingService extends CacheOperations {
 
 	Uni<Void> setSubAssetAtHome(String sn, Boolean isAtHome);
 
-	Uni<Void> setCurrentAssetTelemetry(String deviceSn, AssetTelemetry assetTelemetry);
+	Uni<Void> setCurrentTelemetry(String deviceSn, Telemetry telemetry);
 
 	Uni<Void> setAssetSubAssetReferenceToAsset(String subAssetSn, String assetSn);
 
 	Uni<String> getSubAssetReferenceToAsset(String subAssetSn);
 
-	Uni<AssetTelemetry> getCurrentAssetTelemetry(String deviceSn);
-
-	Uni<Void> setSubAssetCurrentTelemetry(String deviceSn, SubAssetTelemetry subAssetTelemetry);
-
-	Uni<SubAssetTelemetry> getSubAssetCurrentTelemetry(String deviceSn);
+	Uni<Telemetry> getCurrentTelemetry(String deviceSn);
 
 	Uni<Void> setWaitingForServicesReply(String tid, String command, Object data);
 
