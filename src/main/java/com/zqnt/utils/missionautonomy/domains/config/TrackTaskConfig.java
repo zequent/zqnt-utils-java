@@ -1,7 +1,7 @@
 package com.zqnt.utils.missionautonomy.domains.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zqnt.utils.common.proto.TaskTypeProto;
+import com.zqnt.utils.mission.proto.TaskTypeProto;
 import lombok.*;
 
 /**

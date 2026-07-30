@@ -1,6 +1,6 @@
 package com.zqnt.utils.missionautonomy.domains;
 
-import com.zqnt.utils.common.proto.DecisionTriggerType;
+import com.zqnt.utils.mission.proto.DecisionTriggerType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

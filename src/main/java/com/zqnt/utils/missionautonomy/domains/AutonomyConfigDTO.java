@@ -1,7 +1,7 @@
 package com.zqnt.utils.missionautonomy.domains;
 
-import com.zqnt.utils.common.proto.AutonomyMode;
-import com.zqnt.utils.common.proto.DecisionStrategyType;
+import com.zqnt.utils.mission.proto.AutonomyMode;
+import com.zqnt.utils.mission.proto.DecisionStrategyType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

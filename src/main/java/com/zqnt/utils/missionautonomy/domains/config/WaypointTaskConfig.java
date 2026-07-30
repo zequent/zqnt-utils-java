@@ -2,7 +2,7 @@ package com.zqnt.utils.missionautonomy.domains.config;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zqnt.utils.common.proto.*;
+import com.zqnt.utils.mission.proto.*;
 import com.zqnt.utils.missionautonomy.domains.WaypointDTO;
 import lombok.*;
 

@@ -1,7 +1,7 @@
 package com.zqnt.utils.missionautonomy.domains;
 
-import com.zqnt.utils.common.proto.MissionStatus;
-import com.zqnt.utils.common.proto.MissionType;
+import com.zqnt.utils.mission.proto.MissionStatus;
+import com.zqnt.utils.mission.proto.MissionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

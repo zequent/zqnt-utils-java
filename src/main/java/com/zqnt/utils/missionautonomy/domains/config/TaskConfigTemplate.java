@@ -2,7 +2,7 @@ package com.zqnt.utils.missionautonomy.domains.config;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.zqnt.utils.common.proto.TaskTypeProto;
+import com.zqnt.utils.mission.proto.TaskTypeProto;
 
 import java.io.Serializable;
 
