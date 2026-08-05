@@ -18,6 +18,7 @@ public class MissionZoneDTO {
     private String name;
     private MissionZoneType type;
     private ZoneEnforcementType enforcementType;
+    private GeoAreaDTO area;
     private Boolean active;
     private Integer priority;
     private DynamicConfigDTO config;
@@ -32,5 +33,9 @@ public class MissionZoneDTO {
         if (enforcementType == null) {
             throw new IllegalArgumentException("Zone enforcement type must be specified");
         }
+        if (area == null) {
+            throw new IllegalArgumentException("Zone area must be specified");
+        }
+        area.validate();
     }
 }
