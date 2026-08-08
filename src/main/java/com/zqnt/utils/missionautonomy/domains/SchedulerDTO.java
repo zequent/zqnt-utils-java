@@ -23,12 +23,16 @@ public class SchedulerDTO implements Serializable {
     private LocalDateTime modifiedAt;
     private String modifiedFrom;
     private String name;
-    private UUID missionId;
-    private UUID taskId;
     private String cronExpression;
     private Boolean active;
     private SchedulerType type;
     private String clientTimeZone;
+    private String assetSn;
+    private String commandId;
+    private String capabilityPackageId;
+    private String capabilityId;
+    private String executionParametersJson;
+    private Boolean autoStart;
 
     /**
      * Validates this scheduler configuration
@@ -43,8 +47,16 @@ public class SchedulerDTO implements Serializable {
             throw new IllegalArgumentException("Scheduler name must be provided");
         }
 
-        if (missionId == null && taskId == null) {
-            throw new IllegalArgumentException("Mission or task ID must be specified");
+        boolean simpleExecution = assetSn != null && !assetSn.isBlank()
+                && commandId != null && !commandId.isBlank();
+        boolean packageExecution = assetSn != null && !assetSn.isBlank()
+                && capabilityPackageId != null && !capabilityPackageId.isBlank()
+                && capabilityId != null && !capabilityId.isBlank();
+        if (!simpleExecution && !packageExecution) {
+            throw new IllegalArgumentException("Capability execution target must be specified");
+        }
+        if (simpleExecution && packageExecution) {
+            throw new IllegalArgumentException("Scheduler cannot define command and package execution together");
         }
 
         if (cronExpression == null || cronExpression.trim().isEmpty()) {

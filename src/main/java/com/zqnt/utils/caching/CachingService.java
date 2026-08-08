@@ -7,7 +7,6 @@ import com.zqnt.utils.devicecontrol.proto.LiveStreamState;
 import com.zqnt.utils.devicecontrol.proto.ManualControlRequest;
 import com.zqnt.utils.devicecontrol.proto.ManualControlState;
 import com.zqnt.utils.common.proto.SubAssetProtoDTO;
-import com.zqnt.utils.mission.proto.TaskProtoDTO;
 import com.zqnt.utils.core.EdgeEndpointDTO;
 import com.zqnt.utils.livedata.proto.Telemetry;
 import io.smallrye.mutiny.Uni;
@@ -101,16 +100,6 @@ public interface CachingService extends CacheOperations {
 	Uni<Void> deleteEdgeEndpoint(String vendor);
 
 	Uni<Void> setAssetOnline(String deviceSn);
-
-	Uni<Void> addActiveTaskToAsset(String sn, String taskId, TaskProtoDTO taskProtoDTO);
-
-	Uni<TaskProtoDTO> hasAnyAssetActiveTask(String sn);
-
-	Uni<Void> assignedTaskIsCompleted(String sn, String taskId);
-
-	Uni<Void> setAssetTaskExternalIdReference(String externalId, String sn, TaskProtoDTO taskProtoDTO);
-
-	Uni<TaskProtoDTO> getAssetTaskWithExternalIdReference(String externalId, String sn);
 
 	Uni<AssetMode> getAssetMode(String deviceSn);
 
