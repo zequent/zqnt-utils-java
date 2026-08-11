@@ -27,6 +27,13 @@ public class NotificationDTO implements Serializable {
     private String title;
     private String message;
     private Boolean read;
-    private String taskId;
-    private String missionId;
+    private String capabilityExecutionId;
+    private String capabilityNodeId;
+    private String capabilityEventType;
+    private String capabilityExecutionStatus;
+    private String capabilityNodeStatus;
+    private Float progress;
+    private String externalExecutionId;
+    private String commandId;
+    private String commandExecutionStatus;
 }
