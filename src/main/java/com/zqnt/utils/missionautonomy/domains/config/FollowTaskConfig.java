@@ -1,7 +1,7 @@
 package com.zqnt.utils.missionautonomy.domains.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zqnt.utils.missionautonomy.domains.TaskType;
+import com.zqnt.utils.mission.proto.TaskTypeProto;
 import lombok.*;
 
 /**
@@ -125,12 +125,12 @@ public class FollowTaskConfig implements TaskConfigTemplate {
 
     @Override
     public String getConfigType() {
-        return TaskType.TASK_TYPE_FOLLOW.name();
+        return TaskTypeProto.TASK_TYPE_FOLLOW.name();
     }
 
     @Override
-    public TaskType getTaskType() {
-        return TaskType.TASK_TYPE_FOLLOW;
+    public TaskTypeProto getTaskType() {
+        return TaskTypeProto.TASK_TYPE_FOLLOW;
     }
 
     @Override

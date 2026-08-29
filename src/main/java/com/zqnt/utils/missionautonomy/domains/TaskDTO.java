@@ -1,7 +1,6 @@
 package com.zqnt.utils.missionautonomy.domains;
 
-import com.fasterxml.jackson.annotation.JsonTypeName;
-import com.zqnt.utils.common.proto.*;
+import com.zqnt.utils.mission.proto.*;
 import com.zqnt.utils.missionautonomy.domains.config.TaskConfigTemplate;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -30,7 +29,7 @@ import java.util.UUID;
  *
  * TaskDTO task = TaskDTO.builder()
  *     .name("Inspection Mission")
- *     .taskType(TaskType.WAYPOINT)
+ *     .taskType(TaskTypeProto.TASK_TYPE_WAYPOINT)
  *     .config(config)
  *     .assetId("DRONE-001")
  *     .build();
@@ -86,7 +85,7 @@ public class TaskDTO implements Serializable {
     /**
      * Task type (determines which config implementation is used)
      */
-    private TaskType taskType;
+    private TaskTypeProto taskType;
 
     /**
      * Type-specific configuration (polymorphic based on taskType)
@@ -100,6 +99,10 @@ public class TaskDTO implements Serializable {
      * external task ID
      */
     private String externalTaskId;
+    private DynamicConfigDTO taskConfigTemplate;
+    private AutonomyConfigDTO autonomyConfig;
+    private Integer executionOrder;
+    private Boolean decisionEngineEnabled;
 
     /**
      * Current task status
@@ -144,17 +147,19 @@ public class TaskDTO implements Serializable {
             throw new IllegalArgumentException("Task type must be specified");
         }
 
-        if (config == null) {
-            throw new IllegalArgumentException("Task configuration must be provided");
+        if (config == null && taskConfigTemplate == null) {
+            throw new IllegalArgumentException("Task configuration or dynamic task template must be provided");
         }
 
-        if (config.getTaskType() != taskType) {
+        if (config != null && config.getTaskType() != taskType) {
             throw new IllegalArgumentException(
                     String.format("Config type mismatch: expected %s, got %s",
                             taskType, config.getTaskType())
             );
         }
 
-        config.validate();
+        if (config != null) {
+            config.validate();
+        }
     }
 }

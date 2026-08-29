@@ -1,6 +1,6 @@
 package com.zqnt.utils.notifications.domains;
 
-import com.zqnt.utils.livedata.proto.NotificationEventType;
+import com.zqnt.utils.events.proto.NotificationEventType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,5 +28,5 @@ public class NotificationDTO implements Serializable {
     private String message;
     private Boolean read;
     private String taskId;
-    private String operationId;
+    private String missionId;
 }

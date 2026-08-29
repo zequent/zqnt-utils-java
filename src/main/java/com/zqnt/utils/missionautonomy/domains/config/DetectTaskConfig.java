@@ -1,7 +1,7 @@
 package com.zqnt.utils.missionautonomy.domains.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.zqnt.utils.missionautonomy.domains.TaskType;
+import com.zqnt.utils.mission.proto.TaskTypeProto;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -191,12 +191,12 @@ public class DetectTaskConfig implements TaskConfigTemplate {
 
     @Override
     public String getConfigType() {
-        return TaskType.TASK_TYPE_DETECT.name();
+        return TaskTypeProto.TASK_TYPE_DETECT.name();
     }
 
     @Override
-    public TaskType getTaskType() {
-        return TaskType.TASK_TYPE_DETECT;
+    public TaskTypeProto getTaskType() {
+        return TaskTypeProto.TASK_TYPE_DETECT;
     }
 
     @Override

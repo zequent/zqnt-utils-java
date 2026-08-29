@@ -12,9 +12,9 @@ public enum ZequentTopics {
 			"asset/{}/drc-down"), ASSET_DRC_UP_TOPIC("asset/{}/drc-up"), ASSET_EVENT_TOPIC("asset/{}/events"),
 
 	ASSET_SERVICE_REQUEST_TOPIC("service/asset-service/request"), ASSET_SERVICE_REPLY_TOPIC(
-			"service/asset-service/response"), OPERATION_SERVICE_REQUEST_TOPIC(
-			"service/operation-service/request"), OPERATION_SERVICE_REPLY_TOPIC(
-			"service/operation-service/response"), SCHEDULER_SERVICE_REQUEST_TOPIC(
+			"service/asset-service/response"), MISSION_SERVICE_REQUEST_TOPIC(
+			"service/mission-service/request"), MISSION_SERVICE_REPLY_TOPIC(
+			"service/mission-service/response"), SCHEDULER_SERVICE_REQUEST_TOPIC(
 			"service/scheduler-service/request"), SCHEDULER_SERVICE_REPLY_TOPIC(
 			"service/scheduler-service/response"),
 	EVENTS_REPLY("thing/product/{}/events_reply"), DRC_DOWN("thing/product/{}/drc/down"),

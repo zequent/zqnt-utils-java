@@ -1,6 +1,6 @@
 package com.zqnt.utils.missionautonomy.domains;
 
-import com.zqnt.utils.common.proto.SchedulerType;
+import com.zqnt.utils.mission.proto.SchedulerType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -43,12 +43,8 @@ public class SchedulerDTO implements Serializable {
             throw new IllegalArgumentException("Scheduler name must be provided");
         }
 
-        if (missionId == null) {
-            throw new IllegalArgumentException("Mission ID must be specified");
-        }
-
-        if (taskId == null) {
-            throw new IllegalArgumentException("Task ID must be specified");
+        if (missionId == null && taskId == null) {
+            throw new IllegalArgumentException("Mission or task ID must be specified");
         }
 
         if (cronExpression == null || cronExpression.trim().isEmpty()) {

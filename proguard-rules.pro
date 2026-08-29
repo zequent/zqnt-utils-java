@@ -15,6 +15,9 @@
 # application classes
 -keep class org.example.** { *; }
 
+# Public licensing API consumed by framework services
+-keep class com.zqnt.utils.licensing.** { *; }
+
 # main entrypoint
 -keep class * {
     public static void main(java.lang.String[]);

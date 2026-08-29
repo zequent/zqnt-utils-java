@@ -2,7 +2,7 @@ package com.zqnt.utils.missionautonomy.domains.config;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.zqnt.utils.missionautonomy.domains.TaskType;
+import com.zqnt.utils.mission.proto.TaskTypeProto;
 
 import java.io.Serializable;
 
@@ -35,7 +35,7 @@ public interface TaskConfigTemplate extends Serializable {
     /**
      * Returns the task type this configuration belongs to
      */
-    TaskType getTaskType();
+    TaskTypeProto getTaskType();
 
     /**
      * Validates the configuration
