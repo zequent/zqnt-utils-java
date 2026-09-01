@@ -3,6 +3,7 @@ package com.zqnt.utils.crypto;
 import java.security.KeyFactory;
 import java.security.PublicKey;
 import java.security.Signature;
+import java.security.SignatureException;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 
@@ -39,6 +40,14 @@ public class ExportVerifier {
             return verifier.verify(signature);
         } catch (ExportEnvelopeException e) {
             throw e;
+        } catch (SignatureException e) {
+            // The JDK's EdDSA provider throws this — rather than just returning false from
+            // verify() — for a signature blob that isn't even a well-formed point on the curve,
+            // which a single flipped bit can easily produce. That's still just "this signature
+            // doesn't verify" from a caller's point of view (a tampered/corrupted signature is
+            // exactly this method's job to reject), not a key-configuration or deployment bug —
+            // matches this method's own documented contract, see the doc comment above.
+            return false;
         } catch (Exception e) {
             throw new ExportEnvelopeException("Could not verify export signature", e);
         }
