@@ -20,7 +20,12 @@ public record PlatformClaims(
         String organizationId,
         Set<String> roles,
         Instant issuedAt,
-        Instant expiresAt) {
+        Instant expiresAt,
+        // Unique per issued token (null only for a token minted before this field existed — such a
+        // token simply can't be individually revoked, it can still be killed platform-wide via a
+        // security-stamp check on `subject`+`issuedAt`, and it naturally expires within its own
+        // lifetime regardless). See admin-console's TokenRevocationService for how this is used.
+        String jti) {
 
     /** The one role that bypasses tenant filtering everywhere — a platform operator, not a member
      * of any one customer's organization. Deliberately a single fixed role, not a permission bit

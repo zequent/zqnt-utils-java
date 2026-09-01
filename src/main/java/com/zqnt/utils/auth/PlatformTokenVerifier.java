@@ -102,7 +102,8 @@ public class PlatformTokenVerifier {
                 organizationId,
                 roles,
                 issuedAt,
-                expiresAt);
+                expiresAt,
+                payload.hasNonNull("jti") ? payload.get("jti").asText() : null);
     }
 
     private void validateIdentity(PlatformClaims claims) throws PlatformTokenVerificationException {

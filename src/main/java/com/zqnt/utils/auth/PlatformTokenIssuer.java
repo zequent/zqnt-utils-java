@@ -11,6 +11,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Base64;
+import java.util.UUID;
 
 /**
  * Mints a platform auth token — the issuing counterpart to {@link PlatformTokenVerifier}, same
@@ -59,6 +60,9 @@ public class PlatformTokenIssuer {
             roles.forEach(rolesArray::add);
             payload.put("iat", now.getEpochSecond());
             payload.put("exp", expiresAt.getEpochSecond());
+            // Unique per issued token — lets a caller revoke this exact token (logout) without
+            // affecting any other token the same user still holds. See PlatformClaims#jti.
+            payload.put("jti", UUID.randomUUID().toString());
 
             Base64.Encoder encoder = Base64.getUrlEncoder().withoutPadding();
             String headerPart = encoder.encodeToString(objectMapper.writeValueAsBytes(header));
