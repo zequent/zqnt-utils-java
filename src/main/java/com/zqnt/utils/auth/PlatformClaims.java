@@ -39,6 +39,15 @@ public record PlatformClaims(
      * instead, so the two still can't drift apart despite this constant being the literal. */
     public static final String SYSTEM_ADMIN_ROLE = "system_admin";
 
+    /** Administers one organization's own users/seats/configuration — the role
+     * {@code @RequireRole(ORG_ADMIN_ROLE)} names on the user-management endpoints so an org-admin
+     * caller passes too (a {@code system_admin} caller always passes regardless of which role is
+     * named — see {@link com.zqnt.core.adminconsole.security.RoleCheckFilter} — so naming this one
+     * doesn't narrow who system_admin can still reach). Same "literal constant, not a method call"
+     * reasoning as {@link #SYSTEM_ADMIN_ROLE} — {@link PlatformRole#ORG_ADMIN} points back at this
+     * constant instead of the reverse, so the two can't drift apart. */
+    public static final String ORG_ADMIN_ROLE = "org-admin";
+
     public PlatformClaims {
         roles = roles == null ? Set.of() : Set.copyOf(roles);
     }

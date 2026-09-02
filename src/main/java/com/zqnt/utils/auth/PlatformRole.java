@@ -28,11 +28,13 @@ public enum PlatformRole {
     SYSTEM_ADMIN(PlatformClaims.SYSTEM_ADMIN_ROLE, Scope.GLOBAL,
             "Platform operator. Not scoped to any single organization; bypasses tenant filtering."),
 
-    /** Manages their own organization's users and seats — the intended long-term caller of user
-     * invitation flows (see {@code UserAPI}'s system_admin-only note: this role exists in the
-     * catalog before anything actually grants it, the same way {@code system_admin} did before
-     * auth existed at all). */
-    ORG_ADMIN("org-admin", Scope.ORGANIZATION,
+    /** Manages their own organization's users and seats — the caller of the user-management
+     * endpoints (see {@link PlatformClaims#ORG_ADMIN_ROLE}, which this points at so the two can't
+     * drift apart). Can create/list/reset-password/revoke-sessions for any user in its own
+     * organization, including granting the {@code org-admin} role to someone else -- but never
+     * {@code system_admin}, to anyone, under any circumstance (see
+     * {@code UserAPIImpl#validateGrantableRoles}). */
+    ORG_ADMIN(PlatformClaims.ORG_ADMIN_ROLE, Scope.ORGANIZATION,
             "Administers one organization: its users, seats, and configuration."),
 
     /** Day-to-day operational access within one organization: runs/monitors missions and assets,
