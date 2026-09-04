@@ -3,13 +3,13 @@ package com.zqnt.utils.caching;
 import com.zqnt.utils.common.proto.AssetMode;
 import com.zqnt.utils.common.proto.AssetProtoDTO;
 import com.zqnt.utils.common.proto.AssetTypeEnum;
+import com.zqnt.utils.common.proto.SubAssetProtoDTO;
+import com.zqnt.utils.core.EdgeEndpointDTO;
 import com.zqnt.utils.devicecontrol.proto.LiveStreamState;
 import com.zqnt.utils.devicecontrol.proto.ManualControlRequest;
 import com.zqnt.utils.devicecontrol.proto.ManualControlState;
-import com.zqnt.utils.common.proto.SubAssetProtoDTO;
-import com.zqnt.utils.mission.proto.TaskProtoDTO;
-import com.zqnt.utils.core.EdgeEndpointDTO;
 import com.zqnt.utils.livedata.proto.Telemetry;
+import com.zqnt.utils.mission.proto.TaskProtoDTO;
 import io.smallrye.mutiny.Uni;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -102,15 +102,47 @@ public interface CachingService extends CacheOperations {
 
 	Uni<Void> setAssetOnline(String deviceSn);
 
-	Uni<Void> addActiveTaskToAsset(String sn, String taskId, TaskProtoDTO taskProtoDTO);
+	// Task-caching methods below are implemented as defaults purely on top of CacheOperations
+	// (get/set/delete/keys) so every implementer gets them for free from CacheKeys.ASSET_ACTIVE_TASKS
+	// / ASSET_TASK_EXTERNAL_ID_REFERENCE — no Redis-specific access required. Override if a service
+	// needs a different storage strategy.
+	default Uni<Void> addActiveTaskToAsset(String sn, String taskId, TaskProtoDTO taskProtoDTO) {
+		return set(CacheKeys.ASSET_ACTIVE_TASKS.getKeyPrefix()
+				.replace("{sn}", sn)
+				.replace("{taskId}", taskId), com.zqnt.utils.core.ProtoJsonUtils.toJson(taskProtoDTO));
+	}
 
-	Uni<TaskProtoDTO> hasAnyAssetActiveTask(String sn);
+	default Uni<TaskProtoDTO> hasAnyAssetActiveTask(String sn) {
+		String pattern = CacheKeys.ASSET_ACTIVE_TASKS.getKeyPrefix().replace("{sn}", sn).replace("{taskId}", "*");
+		return keys(pattern).flatMap(matchingKeys -> {
+			if (matchingKeys.isEmpty()) return Uni.createFrom().nullItem();
+			return get(matchingKeys.iterator().next()).map(json -> {
+				if (json == null || json.isBlank()) return null;
+				return (TaskProtoDTO) com.zqnt.utils.core.ProtoJsonUtils.fromJson(json, TaskProtoDTO.newBuilder());
+			});
+		});
+	}
 
-	Uni<Void> assignedTaskIsCompleted(String sn, String taskId);
+	default Uni<Void> assignedTaskIsCompleted(String sn, String taskId) {
+		return delete(CacheKeys.ASSET_ACTIVE_TASKS.getKeyPrefix()
+				.replace("{sn}", sn)
+				.replace("{taskId}", taskId)).replaceWithVoid();
+	}
 
-	Uni<Void> setAssetTaskExternalIdReference(String externalId, String sn, TaskProtoDTO taskProtoDTO);
+	default Uni<Void> setAssetTaskExternalIdReference(String externalId, String sn, TaskProtoDTO taskProtoDTO) {
+		return set(CacheKeys.ASSET_TASK_EXTERNAL_ID_REFERENCE.getKeyPrefix()
+				.replace("{externalId}", externalId)
+				.replace("{sn}", sn), com.zqnt.utils.core.ProtoJsonUtils.toJson(taskProtoDTO));
+	}
 
-	Uni<TaskProtoDTO> getAssetTaskWithExternalIdReference(String externalId, String sn);
+	default Uni<TaskProtoDTO> getAssetTaskWithExternalIdReference(String externalId, String sn) {
+		return get(CacheKeys.ASSET_TASK_EXTERNAL_ID_REFERENCE.getKeyPrefix()
+				.replace("{externalId}", externalId)
+				.replace("{sn}", sn)).map(json -> {
+			if (json == null || json.isBlank()) return null;
+			return (TaskProtoDTO) com.zqnt.utils.core.ProtoJsonUtils.fromJson(json, TaskProtoDTO.newBuilder());
+		});
+	}
 
 	Uni<AssetMode> getAssetMode(String deviceSn);
 
