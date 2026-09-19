@@ -9,11 +9,7 @@ import java.security.PublicKey;
 import java.security.Signature;
 import java.security.spec.X509EncodedKeySpec;
 import java.time.Instant;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class LicenseVerifier {
 
@@ -108,6 +104,7 @@ public class LicenseVerifier {
                 text(payload, "license_id"),
                 text(payload, "activation_id"),
                 text(payload, "installation_id"),
+                payload.hasNonNull("organization_id") ? payload.get("organization_id").asText() : null,
                 text(payload, "product"),
                 features,
                 limits,
