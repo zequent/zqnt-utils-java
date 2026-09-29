@@ -33,6 +33,8 @@ public class SchedulerDTO implements Serializable {
     private String capabilityId;
     private String executionParametersJson;
     private Boolean autoStart;
+    /** The organization this schedule belongs to; null = system-wide. */
+    private String organizationId;
 
     /**
      * Validates this scheduler configuration
