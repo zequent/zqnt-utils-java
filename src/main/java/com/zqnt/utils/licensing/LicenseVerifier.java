@@ -111,7 +111,18 @@ public class LicenseVerifier {
                 epochSecond(payload, "iat", false),
                 epochSecond(payload, "nbf", false),
                 expiresAt,
-                graceUntil);
+                graceUntil,
+                optionalText(payload, "organization_name"),
+                optionalText(payload, "organization_description"));
+    }
+
+    /** A claim that may be absent (older hubs): null when missing or blank. */
+    private static String optionalText(JsonNode payload, String field) {
+        JsonNode value = payload.get(field);
+        if (value == null || value.isNull() || !value.isTextual() || value.asText().isBlank()) {
+            return null;
+        }
+        return value.asText().trim();
     }
 
     private void validateIdentity(LicenseClaims claims) throws LicenseVerificationException {

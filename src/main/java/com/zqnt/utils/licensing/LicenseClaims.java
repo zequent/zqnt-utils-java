@@ -23,7 +23,22 @@ public record LicenseClaims(
         Instant issuedAt,
         Instant notBefore,
         Instant expiresAt,
-        Instant graceUntil) {
+        Instant graceUntil,
+        // The organization's name and description as the hub issued the license, signed like every
+        // other claim, so a platform may create the organization from them. Null for a lease from a
+        // hub that predates them, or a license issued without them. The platform uses them once, to
+        // create the organization; afterwards the platform's own record is authoritative.
+        String organizationName,
+        String organizationDescription) {
+
+    /** A lease without organization name/description claims (every hub before they existed). */
+    public LicenseClaims(String issuer, Set<String> audience, String leaseId, String licenseId,
+            String activationId, String installationId, String organizationId, String product,
+            Set<String> features, Map<String, Long> limits, Instant issuedAt, Instant notBefore,
+            Instant expiresAt, Instant graceUntil) {
+        this(issuer, audience, leaseId, licenseId, activationId, installationId, organizationId, product,
+                features, limits, issuedAt, notBefore, expiresAt, graceUntil, null, null);
+    }
 
     public LicenseClaims {
         audience = audience == null ? Set.of() : Set.copyOf(audience);
