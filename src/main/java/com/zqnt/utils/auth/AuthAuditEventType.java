@@ -14,6 +14,10 @@ public final class AuthAuditEventType {
     public static final String LOGOUT = "LOGOUT";
     public static final String PASSWORD_RESET = "PASSWORD_RESET";
     public static final String SESSIONS_REVOKED = "SESSIONS_REVOKED";
+    public static final String USER_ROLES_CHANGED = "USER_ROLES_CHANGED";
+    public static final String USER_DISABLED = "USER_DISABLED";
+    public static final String USER_ENABLED = "USER_ENABLED";
+    public static final String USER_DELETED = "USER_DELETED";
 
     private AuthAuditEventType() {
     }
