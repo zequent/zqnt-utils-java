@@ -9,11 +9,7 @@ import java.security.PublicKey;
 import java.security.Signature;
 import java.security.spec.X509EncodedKeySpec;
 import java.time.Instant;
-import java.util.Base64;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class LicenseVerifier {
 
@@ -108,13 +104,25 @@ public class LicenseVerifier {
                 text(payload, "license_id"),
                 text(payload, "activation_id"),
                 text(payload, "installation_id"),
+                payload.hasNonNull("organization_id") ? payload.get("organization_id").asText() : null,
                 text(payload, "product"),
                 features,
                 limits,
                 epochSecond(payload, "iat", false),
                 epochSecond(payload, "nbf", false),
                 expiresAt,
-                graceUntil);
+                graceUntil,
+                optionalText(payload, "organization_name"),
+                optionalText(payload, "organization_description"));
+    }
+
+    /** A claim that may be absent (older hubs): null when missing or blank. */
+    private static String optionalText(JsonNode payload, String field) {
+        JsonNode value = payload.get(field);
+        if (value == null || value.isNull() || !value.isTextual() || value.asText().isBlank()) {
+            return null;
+        }
+        return value.asText().trim();
     }
 
     private void validateIdentity(LicenseClaims claims) throws LicenseVerificationException {
