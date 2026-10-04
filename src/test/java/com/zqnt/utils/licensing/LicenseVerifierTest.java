@@ -12,6 +12,7 @@ import java.time.Instant;
 import java.util.Base64;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -44,6 +45,30 @@ class LicenseVerifierTest {
         assertEquals("license-1", claims.licenseId());
         assertEquals(25, claims.limits().get("assets"));
         assertTrue(claims.hasFeature(LicenseFeature.LIVE_STREAM));
+    }
+
+    @Test
+    void readsTheSignedOrganizationNameAndDescription() throws Exception {
+        long now = Instant.now().getEpochSecond();
+        String payload = validPayload(now).replace("\"product\":\"zqnt-framework\",",
+                "\"product\":\"zqnt-framework\",\"organization_id\":\"6c1f1c52-1d3e-4b8a-9d61-3a3f0c8f2a11\","
+                        + "\"organization_name\":\" Acme Robotics \",\"organization_description\":\"Plant 4\",");
+
+        LicenseClaims claims = verifier.verify(sign(payload));
+
+        assertEquals("6c1f1c52-1d3e-4b8a-9d61-3a3f0c8f2a11", claims.organizationId());
+        assertEquals("Acme Robotics", claims.organizationName());
+        assertEquals("Plant 4", claims.organizationDescription());
+    }
+
+    @Test
+    void aLeaseWithoutOrganizationNameClaimsStillVerifies() throws Exception {
+        long now = Instant.now().getEpochSecond();
+
+        LicenseClaims claims = verifier.verify(sign(validPayload(now)));
+
+        assertNull(claims.organizationName());
+        assertNull(claims.organizationDescription());
     }
 
     @Test
