@@ -62,7 +62,7 @@
         <protobuf.version>3.25.9</protobuf.version>
         <jackson.version>2.18.11</jackson.version>
         <mutiny.version>2.6.0</mutiny.version>
-        <zqnt-api.version>1.0.0-PR1-8dffa8d-SNAPSHOT</zqnt-api.version>
+        <zqnt-api.version>1.0.0-PR1-2392250-SNAPSHOT</zqnt-api.version>
     </properties>
 
     <distributionManagement>
