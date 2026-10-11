@@ -55,12 +55,12 @@
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <surefire-plugin.version>3.5.0</surefire-plugin.version>
-        <compiler-plugin.version>3.13.0</compiler-plugin.version>
-        <mapstruct.version>1.5.5.Final</mapstruct.version>
-        <grpc.version>1.76.0</grpc.version>
+        <surefire-plugin.version>3.6.0</surefire-plugin.version>
+        <compiler-plugin.version>3.16.0</compiler-plugin.version>
+        <mapstruct.version>1.6.3</mapstruct.version>
+        <grpc.version>1.84.1</grpc.version>
         <protobuf.version>3.25.9</protobuf.version>
-        <jackson.version>2.18.11</jackson.version>
+        <jackson.version>2.22.3</jackson.version>
         <mutiny.version>2.6.0</mutiny.version>
         <zqnt-api.version>3.0.0-PR1-c9a26b2-SNAPSHOT</zqnt-api.version>
     </properties>
@@ -140,7 +140,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.9</version>
+            <version>2.0.20</version>
         </dependency>
         <dependency>
             <groupId>javax.annotation</groupId>
@@ -150,12 +150,12 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.42</version>
+            <version>1.18.48</version>
         </dependency>
         <dependency>
             <groupId>io.swagger.core.v3</groupId>
             <artifactId>swagger-annotations</artifactId>
-            <version>2.2.20</version>
+            <version>2.2.55</version>
         </dependency>
         <dependency>
             <groupId>io.smallrye.reactive</groupId>
@@ -250,7 +250,7 @@
                         <path>
                             <groupId>org.projectlombok</groupId>
                             <artifactId>lombok</artifactId>
-                            <version>1.18.42</version>
+                            <version>1.18.48</version>
                         </path>
                         <path>
                             <groupId>org.projectlombok</groupId>
@@ -272,7 +272,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.5.0</version>
                 <executions>
                     <execution>
                         <id>copy-proto-files</id>
@@ -305,7 +305,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.5.1</version>
                 <configuration>
                     <excludes>
                         <!-- Exclude proto files from root to avoid duplicates -->
@@ -329,7 +329,7 @@
             <plugin>
                 <groupId>io.smallrye</groupId>
                 <artifactId>jandex-maven-plugin</artifactId>
-                <version>3.2.2</version>
+                <version>3.6.0</version>
                 <executions>
                     <execution>
                         <id>make-index</id>
