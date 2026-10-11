@@ -25,9 +25,9 @@ Add the dependency to your `pom.xml`:
 
 ```xml
 <dependency>
-    <groupId>com.zequent</groupId>
-    <artifactId>zqnt-utils</artifactId>
-    <version>1.0.0</version>
+    <groupId>com.zqnt</groupId>
+    <artifactId>zqnt-utils-java</artifactId>
+    <version>3.0.0</version>
 </dependency>
 ```
 
