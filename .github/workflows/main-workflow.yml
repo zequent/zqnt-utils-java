@@ -29,6 +29,7 @@ jobs:
           cache: maven
 
       - name: Build
-        run: mvn -B clean package -Dquarkus.container-image.build=false
+        run: mvn -B clean package -Dquarkus.container-image.build=false --settings .github/settings.xml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTOR: ${{ github.actor }}
