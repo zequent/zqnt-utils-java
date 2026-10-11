@@ -2,6 +2,12 @@
 
 A comprehensive Java SDK providing utilities for building gRPC services with Quarkus framework. This SDK includes support for Protocol Buffers, reactive programming with Mutiny, entity mapping, and database integration.
 
+Since the public/internal split of the contracts, this artifact generates only the **internal**
+contracts (`src/main/proto/internal/{v2,v3}` of the zqnt-protos submodule). The public contracts,
+the telemetry mapping and the DTO/helper classes the SDKs use (`com.zqnt.utils.core`, `*.domains`,
+`JsonUtils`) come from [`com.zqnt:zqnt-api-java`](https://github.com/Zequent/zqnt-api-java), a
+dependency of this artifact, with unchanged packages.
+
 ## Features
 
 - **gRPC Support**: Built-in gRPC service generation and stub creation

@@ -62,6 +62,7 @@
         <protobuf.version>3.25.9</protobuf.version>
         <jackson.version>2.18.11</jackson.version>
         <mutiny.version>2.6.0</mutiny.version>
+        <zqnt-api.version>1.0.0-PR1-8dffa8d-SNAPSHOT</zqnt-api.version>
     </properties>
 
     <distributionManagement>
@@ -77,12 +78,20 @@
             <id>github</id>
             <url>https://maven.pkg.github.com/Zequent/zqnt-utils-java</url>
         </repository>
+        <repository>
+            <id>zqnt-api-repo</id>
+            <url>https://maven.pkg.github.com/Zequent/zqnt-api-java</url>
+        </repository>
     </repositories>
 
 
 
     <dependencies>
-        <!-- Framework-agnostic dependencies -->
+        <dependency>
+            <groupId>com.zqnt</groupId>
+            <artifactId>zqnt-api-java</artifactId>
+            <version>${zqnt-api.version}</version>
+        </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-protobuf</artifactId>
@@ -164,17 +173,15 @@
 
     <build>
         <resources>
-            <!-- Include proto files in the JAR so other services can use them: the frozen v2 files
-                 exactly where they always were, the v3 tree (zqnt/<domain>/v3/...) next to them. -->
             <resource>
-                <directory>src/main/proto/v2</directory>
+                <directory>src/main/proto/internal/v2</directory>
                 <targetPath>META-INF/proto</targetPath>
                 <includes>
                     <include>*.proto</include>
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/proto/v3</directory>
+                <directory>src/main/proto/internal/v3</directory>
                 <targetPath>META-INF/proto</targetPath>
                 <includes>
                     <include>**/*.proto</include>
@@ -201,9 +208,8 @@
                     <pluginId>grpc-java</pluginId>
                     <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
                 </configuration>
-                <!-- zqnt-protos has two proto roots (see its README): v2, frozen and byte-identical
-                     to 2.0.0, and v3. Each is generated with its own include path; v3 runs second
-                     and must not clear what v2 generated. -->
+                <!-- Only internal/ is generated here; public/ is on the include path and its
+                     classes come from zqnt-api-java, so no type is compiled twice. -->
                 <executions>
                     <execution>
                         <id>compile-grpc-v2</id>
@@ -212,7 +218,10 @@
                             <goal>compile-custom</goal>
                         </goals>
                         <configuration>
-                            <protoSourceRoot>${project.basedir}/src/main/proto/v2</protoSourceRoot>
+                            <protoSourceRoot>${project.basedir}/src/main/proto/internal/v2</protoSourceRoot>
+                            <additionalProtoPathElements>
+                                <additionalProtoPathElement>${project.basedir}/src/main/proto/public/v2</additionalProtoPathElement>
+                            </additionalProtoPathElements>
                         </configuration>
                     </execution>
                     <execution>
@@ -222,7 +231,10 @@
                             <goal>compile-custom</goal>
                         </goals>
                         <configuration>
-                            <protoSourceRoot>${project.basedir}/src/main/proto/v3</protoSourceRoot>
+                            <protoSourceRoot>${project.basedir}/src/main/proto/internal/v3</protoSourceRoot>
+                            <additionalProtoPathElements>
+                                <additionalProtoPathElement>${project.basedir}/src/main/proto/public/v3</additionalProtoPathElement>
+                            </additionalProtoPathElements>
                             <clearOutputDirectory>false</clearOutputDirectory>
                         </configuration>
                     </execution>
@@ -272,14 +284,14 @@
                             <outputDirectory>${project.build.outputDirectory}/META-INF/proto</outputDirectory>
                             <resources>
                                 <resource>
-                                    <directory>src/main/proto/v2</directory>
+                                    <directory>src/main/proto/internal/v2</directory>
                                     <includes>
                                         <include>*.proto</include>
                                     </includes>
                                     <filtering>false</filtering>
                                 </resource>
                                 <resource>
-                                    <directory>src/main/proto/v3</directory>
+                                    <directory>src/main/proto/internal/v3</directory>
                                     <includes>
                                         <include>**/*.proto</include>
                                     </includes>
